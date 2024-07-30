@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 func Connect() *gorm.DB {
 	err := godotenv.Load()
@@ -23,11 +23,11 @@ func Connect() *gorm.DB {
 		log.Fatal("DATABASE_URL not set in .env file")
 	}
 
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("failed to connect to the database:", err)
 	}
 
-	db.AutoMigrate(&entity.Media{})
-	return db
+	DB.AutoMigrate(&entity.Media{})
+	return DB
 }
