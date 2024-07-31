@@ -8,6 +8,7 @@ import (
 
 type MediaRepository interface {
 	ListMedias() ([]model.Media, error)
+	CreateMedia(media model.Media) error
 }
 
 type mediasRepository struct {
@@ -22,4 +23,9 @@ func (r *mediasRepository) ListMedias() ([]model.Media, error) {
 	var medias []model.Media
 	result := r.db.Find(&medias)
 	return medias, result.Error
+}
+
+func (r *mediasRepository) CreateMedia(media model.Media) error {
+	result := r.db.Create(&media)
+	return result.Error
 }

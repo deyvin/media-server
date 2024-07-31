@@ -14,11 +14,14 @@ func main() {
 	db := database.DB
 
 	mediaRepo := repository.PgMediaRepository(db)
-	mediaService := service.NewListMediasService(mediaRepo)
-	mediaController := controller.NewMediaController(mediaService)
+	listmediaService := service.NewListMediasService(mediaRepo)
+	createMediaService := service.NewCreateMediaService(mediaRepo)
+
+	mediaController := controller.NewMediaController(listmediaService, createMediaService)
 
 	r := gin.Default()
 	r.GET("/medias", mediaController.ListMedias)
+	r.POST("/medias", mediaController.CreateMedia)
 
 	r.Run()
 }
