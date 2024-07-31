@@ -1,12 +1,12 @@
 package service
 
 import (
-	"media-server/pkg/entity"
+	"media-server/pkg/model"
 	"media-server/pkg/repository"
 )
 
 type ListMediasService interface {
-	Execute() ([]entity.Media, error)
+	Execute() ([]model.Media, error)
 }
 
 type listMediasService struct {
@@ -19,6 +19,6 @@ func NewListMediasService(mediaRepo repository.MediaRepository) ListMediasServic
 	}
 }
 
-func (uc *listMediasService) Execute() ([]entity.Media, error) {
+func (uc *listMediasService) Execute() ([]model.Media, error) {
 	return uc.mediaRepo.ListMedias()
 }

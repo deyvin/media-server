@@ -2,7 +2,7 @@ package database
 
 import (
 	"log"
-	"media-server/pkg/entity"
+	"media-server/pkg/model"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -28,6 +28,6 @@ func Connect() *gorm.DB {
 		log.Fatal("failed to connect to the database:", err)
 	}
 
-	DB.AutoMigrate(&entity.Media{})
+	DB.AutoMigrate(&model.Media{})
 	return DB
 }

@@ -1,13 +1,13 @@
 package repository
 
 import (
-	"media-server/pkg/entity"
+	"media-server/pkg/model"
 
 	"gorm.io/gorm"
 )
 
 type MediaRepository interface {
-	ListMedias() ([]entity.Media, error)
+	ListMedias() ([]model.Media, error)
 }
 
 type mediasRepository struct {
@@ -18,8 +18,8 @@ func PgMediaRepository(db *gorm.DB) MediaRepository {
 	return &mediasRepository{db}
 }
 
-func (r *mediasRepository) ListMedias() ([]entity.Media, error) {
-	var medias []entity.Media
+func (r *mediasRepository) ListMedias() ([]model.Media, error) {
+	var medias []model.Media
 	result := r.db.Find(&medias)
 	return medias, result.Error
 }
