@@ -31,7 +31,13 @@ Copie o arquivo .env.example para .env e configure as variáveis de ambiente con
 
 ## Uso
 
-Para iniciar o servidor, execute:
+Para iniciar o servidor, primeiro inicie o docker pra subir o banco de dados
+
+```bash
+docker-compose up -d
+```
+
+depois inicie o servidor
 
 ```bash
 go run cmd/api/main.go
