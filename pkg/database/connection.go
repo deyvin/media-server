@@ -12,7 +12,7 @@ import (
 var DB *gorm.DB
 
 func Connect() *gorm.DB {
-	cfg, err := config.LoadConfig()
+	cfg, err := config.LoadDBConfig()
 	if err != nil {
 		panic(err)
 	}
