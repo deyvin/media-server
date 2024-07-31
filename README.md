@@ -43,17 +43,13 @@ go run cmd/api/main.go
 
 Os controladores lidam com as requisições HTTP e interagem com os casos de uso. Eles são responsáveis por receber as requisições, chamar os casos de uso apropriados e retornar as respostas.
 
-**Usecase**
-
-Os casos de uso contêm a lógica de negócio da aplicação. Eles orquestram a interação entre os controladores e os repositórios, garantindo que as regras de negócio sejam aplicadas corretamente.
-
 **Repository**
 
 Os repositórios lidam com a persistência de dados. Eles são responsáveis por acessar o banco de dados e realizar operações de CRUD (Create, Read, Update, Delete) nas entidades.
 
-**Entity**
+**Model**
 
-As entidades representam os objetos de negócio e suas regras. Elas são estruturas de dados puras que contêm os atributos e métodos relacionados ao domínio da aplicação.
+Os modelos representam os objetos de negócio e suas regras. Elas são estruturas de dados puras que contêm os atributos e métodos relacionados ao domínio da aplicação.
 
 **Database**
 
