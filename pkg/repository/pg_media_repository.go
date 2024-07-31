@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"media-server/app/entity"
+	"media-server/pkg/entity"
 
 	"gorm.io/gorm"
 )

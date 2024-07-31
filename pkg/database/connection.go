@@ -2,7 +2,7 @@ package database
 
 import (
 	"log"
-	"media-server/app/entity"
+	"media-server/pkg/entity"
 	"os"
 
 	"github.com/joho/godotenv"

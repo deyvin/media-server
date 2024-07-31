@@ -1,5 +1,0 @@
-package usecase
-
-func ReadMediaUsecase() {
-	// ...
-}

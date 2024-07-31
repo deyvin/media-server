@@ -1,11 +1,10 @@
 package main
 
 import (
-	"media-server/app/controller"
-	"media-server/app/database"
-	"media-server/app/repository"
-	"media-server/app/service"
-	"media-server/app/usecase"
+	"media-server/pkg/controller"
+	"media-server/pkg/database"
+	"media-server/pkg/repository"
+	"media-server/pkg/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,8 +14,7 @@ func main() {
 	db := database.DB
 
 	mediaRepo := repository.PgMediaRepository(db)
-	listMediasUseCase := usecase.NewListMediasUseCase(mediaRepo)
-	mediaService := service.NewListMediasService(listMediasUseCase)
+	mediaService := service.NewListMediasService(mediaRepo)
 	mediaController := controller.NewMediaController(mediaService)
 
 	r := gin.Default()

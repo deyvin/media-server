@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"media-server/app/service"
+	"media-server/pkg/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +18,7 @@ func NewMediaController(s service.ListMediasService) *MediaController {
 }
 
 func (mc *MediaController) ListMedias(c *gin.Context) {
-	medias, err := mc.listMediasService.ListMedias()
+	medias, err := mc.listMediasService.Execute()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
