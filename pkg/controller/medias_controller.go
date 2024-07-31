@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 type MediaController struct {
@@ -31,17 +32,24 @@ func (mc *MediaController) ListMedias(c *gin.Context) {
 }
 
 func (mc *MediaController) CreateMedia(c *gin.Context) {
-	media := model.Media{}
+	var media model.Media
 	if err := c.ShouldBindJSON(&media); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	media, err := mc.createMediaService.Execute(media)
+	createdMedia, err := mc.createMediaService.Execute(media)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		if _, ok := err.(validator.ValidationErrors); ok {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		}
 		return
 	}
+
+	c.JSON(http.StatusCreated, createdMedia)
 
 	c.JSON(http.StatusCreated, media)
 }
