@@ -8,7 +8,7 @@ import (
 
 type MediaRepository interface {
 	ListMedias() ([]model.Media, error)
-	CreateMedia(media model.Media) error
+	CreateMedia(media model.Media) (model.Media, error)
 }
 
 type mediasRepository struct {
@@ -25,7 +25,7 @@ func (r *mediasRepository) ListMedias() ([]model.Media, error) {
 	return medias, result.Error
 }
 
-func (r *mediasRepository) CreateMedia(media model.Media) error {
+func (r *mediasRepository) CreateMedia(media model.Media) (model.Media, error) {
 	result := r.db.Create(&media)
-	return result.Error
+	return media, result.Error
 }

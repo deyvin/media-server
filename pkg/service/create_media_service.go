@@ -32,6 +32,6 @@ func (uc *createMediaService) Execute(media model.Media) (model.Media, error) {
 	}
 
 	media.ID = uuid.New().String()
-	err = uc.mediaRepo.CreateMedia(media)
+	media, err = uc.mediaRepo.CreateMedia(media)
 	return media, err
 }
