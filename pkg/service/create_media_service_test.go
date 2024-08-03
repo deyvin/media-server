@@ -2,6 +2,7 @@ package service
 
 import (
 	"media-server/pkg/model"
+	"media-server/pkg/test"
 	"testing"
 
 	"github.com/go-playground/validator/v10"
@@ -9,22 +10,8 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type MockMediaRepository struct {
-	mock.Mock
-}
-
-func (m *MockMediaRepository) CreateMedia(media model.Media) (model.Media, error) {
-	args := m.Called(media)
-	return args.Get(0).(model.Media), args.Error(1)
-}
-
-func (m *MockMediaRepository) ListMedias() ([]model.Media, error) {
-	args := m.Called()
-	return args.Get(0).([]model.Media), args.Error(1)
-}
-
 func TestExecuteCreateMediaService(t *testing.T) {
-	mockRepo := new(MockMediaRepository)
+	mockRepo := new(test.MockMediaRepository)
 	validator := validator.New()
 
 	service := createMediaService{
@@ -52,7 +39,7 @@ func TestExecuteCreateMediaService(t *testing.T) {
 }
 
 func TestExecuteCreateMediaServiceWithRequiredError(t *testing.T) {
-	mockRepo := new(MockMediaRepository)
+	mockRepo := new(test.MockMediaRepository)
 	validator := validator.New()
 
 	service := createMediaService{
